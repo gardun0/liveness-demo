@@ -22,9 +22,10 @@
     <!--[if IE]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <video id="camera-vid" class="position-absolute w-100 h-100" autoplay muted playsinline></video>
-
-    <h3 id="camera-button" class="p-3 rounded-sm bg-light position-absolute">Cargando...</h3>
+    <video id="vid-source" autoplay muted playsinline></video>
+    <canvas id="camera-vid" class="position-absolute w-100 h-100"></canvas>
+    <h2 id="camera-legend" class="position-absolute fixed-top w-100 p-4 text-center text-light">Prueba de vida</h2>
+    <h1 id="camera-button" class="p-4 rounded-sm position-absolute text-center text-light">Cargando...</h1>
     <!-- build:js scripts/vendor.js -->
     <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

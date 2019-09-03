@@ -3,24 +3,41 @@ $(function () {
     return;
   }
 
-  const videoSource = document.getElementById('camera-vid')
+  const videoSource = document.getElementById('vid-source')
+  const canvasVideo = document.getElementById('camera-vid')
+
   const cameraText = document.getElementById('camera-button')
+
+  const canvasCtx = canvasVideo.getContext('2d')
+
+  const {body: {clientHeight, clientWidth}} = document
 
   const validate = () => {
     setTimeout(() => {
-      cameraText.innerHTML = 'Validación completada ✅'
+      cameraText.innerHTML = 'Validación completada'
 
       window.close();
     }, 5000)
   }
 
-  const { body: { clientHeight, clientWidth } } = document
+  const renderVideo = () => {
+    canvasCtx.drawImage(videoSource, 0, 0)
+
+    requestAnimationFrame(renderVideo)
+  }
+
+  videoSource.addEventListener('play', function () {
+    cameraText.innerText = 'Mueve tu cara'
+
+    canvasVideo.width = videoSource.videoWidth
+    canvasVideo.height = videoSource.videoHeight
+
+    requestAnimationFrame(renderVideo)
+  })
 
   navigator.mediaDevices.getUserMedia({ video: { width: clientWidth, height: clientHeight } })
     .then(stream => {
       videoSource.srcObject = stream
-
-      cameraText.innerText = 'Validando...'
 
       validate()
     })
