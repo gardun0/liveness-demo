@@ -5,12 +5,6 @@ $(function () {
 
   const videoSource = document.getElementById('camera-vid')
   const cameraText = document.getElementById('camera-button')
-  const test = document.getElementById('test')
-
-
-  const log = (txt) => {
-    test.innerText = `${test.innerText}\n${txt}`
-  }
 
   const validate = () => {
     setTimeout(() => {
@@ -22,15 +16,15 @@ $(function () {
 
   const { body: { clientHeight, clientWidth } } = document
 
-  navigator.mediaDevices.getUserMedia({ video: true })
+  navigator.mediaDevices.getUserMedia({ video: { width: clientWidth, height: clientHeight } })
     .then(stream => {
       videoSource.srcObject = stream
-      log('hola')
+
       cameraText.innerText = 'Validando...'
 
       validate()
     })
-    .catch(err => { log(err.message) })
+    .catch(err => { console.error(err) })
 })
 
 // Uncomment to enable Bootstrap tooltips
