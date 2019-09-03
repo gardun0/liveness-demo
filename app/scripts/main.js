@@ -12,16 +12,20 @@ $(function () {
 
   const {body: {clientHeight, clientWidth}} = document
 
+  const closeIt = () => setTimeout(() => {
+    window.close()
+  }, 2000)
+
   const validate = () => {
     setTimeout(() => {
       cameraText.innerHTML = 'Validación completada'
 
-      window.close();
+      closeIt()
     }, 5000)
   }
 
   const renderVideo = () => {
-    canvasCtx.drawImage(videoSource, 0, 0)
+    canvasCtx.drawImage(videoSource, 0, 0, videoSource.videoWidth, videoSource.videoHeight, 0, 0, clientWidth, clientHeight)
 
     requestAnimationFrame(renderVideo)
   }
@@ -29,8 +33,8 @@ $(function () {
   videoSource.addEventListener('play', function () {
     cameraText.innerText = 'Mueve tu cara'
 
-    canvasVideo.width = videoSource.videoWidth
-    canvasVideo.height = videoSource.videoHeight
+    canvasVideo.width = clientWidth
+    canvasVideo.height = clientHeight
 
     requestAnimationFrame(renderVideo)
   })
