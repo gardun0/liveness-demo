@@ -52,7 +52,7 @@ $(function () {
   //   console.log(videoSource.videoHeight, videoSource.videoWidth)
   // })
 
-  navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 4096 }, height: { ideal: 2160 }  } })
+  navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 4096 }, height: { ideal: 2160 }, facingMode: 'user' } })
     .then(stream => {
       videoSource.srcObject = stream
 
