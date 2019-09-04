@@ -25,7 +25,16 @@ $(function () {
   }
 
   const renderVideo = () => {
-    canvasCtx.drawImage(videoSource, 0, 0, videoSource.videoWidth, videoSource.videoHeight, 0, 0, clientWidth, clientHeight)
+
+    const { videoHeight, videoWidth } = videoSource
+
+    const cutX = clientWidth > videoWidth ? videoWidth : clientWidth
+    const cutY = clientHeight > videoHeight ? videoHeight : clientHeight
+
+    const posX = cutX === videoWidth ? 0 : (videoWidth - clientWidth / 2)
+    const posY = cutY === videoHeight ? 0 : (videoHeight - clientHeight / 2)
+
+    canvasCtx.drawImage(videoSource, posX, posY, cutX, cutY, 0, 0, clientWidth, clientHeight)
 
     requestAnimationFrame(renderVideo)
   }
