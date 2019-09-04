@@ -10,7 +10,7 @@ $(function () {
 
   const canvasCtx = canvasVideo.getContext('2d')
 
-  const {body: {clientHeight, clientWidth}} = document
+  const { innerHeight: clientHeight, innerWidth: clientWidth } = window
 
   const closeIt = () => setTimeout(() => {
     window.close()
@@ -48,7 +48,11 @@ $(function () {
     requestAnimationFrame(renderVideo)
   })
 
-  navigator.mediaDevices.getUserMedia({ video: { width: clientWidth, height: clientHeight } })
+  // videoSource.addEventListener('loadedmetadata', function () {
+  //   console.log(videoSource.videoHeight, videoSource.videoWidth)
+  // })
+
+  navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 4096 }, height: { ideal: 2160 }  } })
     .then(stream => {
       videoSource.srcObject = stream
 
