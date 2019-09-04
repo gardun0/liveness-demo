@@ -32,9 +32,9 @@ $(function () {
     const cutY = clientHeight >= videoHeight ? videoHeight : clientHeight
 
     const posX = clientWidth >= videoWidth ? 0 : ((videoWidth - clientWidth) / 2)
-    const posY = clientHeight >= videoHeight ? 0 : ((videoHeight - clientHeight) / 2)
+    const posY = 0
 
-    canvasCtx.drawImage(videoSource, posX, posY, cutX, cutY, 0, 0, clientWidth, clientHeight)
+    canvasCtx.drawImage(videoSource, posX, posY, cutX, videoHeight, 0, 0, clientWidth, clientHeight)
 
     requestAnimationFrame(renderVideo)
   }
@@ -52,7 +52,7 @@ $(function () {
   //   console.log(videoSource.videoHeight, videoSource.videoWidth)
   // })
 
-  navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 4096 }, height: { ideal: 2160 }, facingMode: 'user' } })
+  navigator.mediaDevices.getUserMedia({ video: { width: { ideal: clientWidth }, height: { ideal: clientHeight }, facingMode: 'user' } })
     .then(stream => {
       videoSource.srcObject = stream
 
